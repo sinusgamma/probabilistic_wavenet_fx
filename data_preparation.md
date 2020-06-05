@@ -36,5 +36,47 @@ The tick_resampler function generates our basic bar features:
 
 The tick_resampler function can produce shifted bars, and this way we can generate augmented time series, but our dataset will consist of only the unshifted regular 5 minute bars.
 
+The histrogram of the features, the bar_spearman is worth a glance.
+
 ![Feature Histograms](https://raw.githubusercontent.com/sinusgamma/probabilistic_wavenet_fx/master/bar_feature_hist.jpg)
 
+## news_transformer.ipynb
+
+We clear the economic news data in this notebook. The original database has 499 GBP, EUR, JPY or USD related event. We keep only the high impact events.  
+
+Most of the features have numerical subfeatures like 'actual', 'consensus', 'previous'. Other events don't have numeric data only the time of the event. We group these other events without numeric subfeatures and handle them as 'speech' or 'Event'.
+
+There are very rare events, we group them to the 'Event' as well. 
+
+After that we have to fill the NaN values.
+
+We create new economic news features: change and surprise.
+
+From the EUR economic events we keep only events of the whole region, Germany and France.
+
+After these transformations we have 76 economic event types.
+
+
+## data_merger.ipynb
+
+The forex data is sampled at every 5 minutes, but the news data isn't so frequent. We merge these datasets in this notebook.
+
+First we process the news data again, and generate one-hot-encoded features from the datasets.
+* event_exist: shows if there is any event at the timestep
+* even_cur: shows if any of the currencies has any event at the timestep (far fewer columns than event_exist)
+* actual_ohe: last actual data of the event
+* previous_ohe: last previous data of the event
+* change_ohe: last change of the event
+* surprise_ohe: last change rate of the event
+* after_counter_ohe: 1.0 when the event happens, and decreases for a predefined steps till it will reach 0.0. After that it is 0.0. This is a kind of memory, showing the network how far are the step from the last occurence of the event.
+* time features
+
+## wavenet_fx_final.ipynb
+
+Last data preprocessing for the specific task in the notebook. Building Tensorflow Dataset API pipelins.  
+This notebook containes the code of the model building and evaulation as well.
+
+We create a new feature: mean_log_r - the log return of the subsequent bar means. Bar means are more stable than OHCL features, so we will forecast the change of the bar means.
+
+We divide the training (2016-2018) and validation (2019) set.
+Scale, standard....
