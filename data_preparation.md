@@ -36,5 +36,5 @@ The tick_resampler function generates our basic bar features:
 
 The tick_resampler function can produce shifted bars, and this way we can generate augmented time series, but our dataset will consist of only the unshifted regular 5 minute bars.
 
-![GitHub Logo](
+![Feature Histograms](https://raw.githubusercontent.com/sinusgamma/probabilistic_wavenet_fx/master/bar_feature_hist.jpg)
 
