@@ -1,6 +1,8 @@
 # Wavenet variations for financial time series prediction: the simple, the directional-Relu, and the probabilistic approach
 
-Article on medium: https://medium.com/@istvan.veber/wavenet-variations-for-financial-time-series-prediction-the-simple-the-directional-relu-and-the-4860d8a97af1
+Article on medium about the goals and the model: https://medium.com/@istvan.veber/wavenet-variations-for-financial-time-series-prediction-the-simple-the-directional-relu-and-the-4860d8a97af1
+
+Data preprocessing and pipeline manual: https://github.com/sinusgamma/probabilistic_wavenet_fx/blob/master/data_preparation.md
 
 My goal is to forecast forex bar features of the upcoming step. Forecasted pairs: EUR/USD, GBP/USD, and JPY/USD (not the more common USD/JPY). We will forecast simple price values, log-returns, and the directions of changes.
 
