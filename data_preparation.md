@@ -73,10 +73,21 @@ First we process the news data again, and generate one-hot-encoded features from
 
 ## wavenet_fx_final.ipynb
 
-Last data preprocessing for the specific task in the notebook. Building Tensorflow Dataset API pipelins.  
-This notebook containes the code of the model building and evaulation as well.
+Final data preprocessing for the specific task and architecture of the deep learning models. Building Tensorflow Dataset API pipelins.  
+This notebook containes the code of the models and evaulation as well.
 
-We create a new feature: mean_log_r - the log return of the subsequent bar means. Bar means are more stable than OHCL features, so we will forecast the change of the bar means.
+New feature: mean_log_r - the log return of the subsequent bar means. Bar means are more stable than OHCL features, so we will forecast the change of the bar means (and the price in other models).
 
-We divide the training (2016-2018) and validation (2019) set.
-Scale, standard....
+Divide the training (2016-2018) and validation (2019) set.
+
+Based on the training period some features are normalized, standardized or scaled (when scaling we don't shift the data, only change its magnitude).
+
+To keep the relative value of the log returnized features we only divide them by the standard deviation of the bar_log_r.
+
+Building the label datasets for the currency prices and log returns of the bar means.
+
+Calculating MAE of naive forecast.
+
+With the Tensorflow Dataset API building variations of input datasets for the models of the notebbok.
+
+
